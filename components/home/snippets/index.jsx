@@ -19,6 +19,7 @@ import { FiTerminal } from "react-icons/fi";
 import { HiOutlineCode } from "react-icons/hi";
 const Snippets = () => {
   let cardBg = useColorModeValue("blue.50", "gray.900");
+  let iconColor = useColorModeValue("#fff", "gray.800");
   return (
     <Box p="4" alignItems={"flex-start"} my="8">
       <VStack alignItems={"flex-start"} spacing=".2em" my="7">
@@ -53,7 +54,7 @@ const Snippets = () => {
             >
               <Box p="8" borderBottomRadius={"3em"}>
                 <IconButton
-                  background={useColorModeValue("#fff", "gray.800")}
+                  background={iconColor}
                   mb="2"
                   rounded={"1.3rem"}
                   aria-label="Code"
