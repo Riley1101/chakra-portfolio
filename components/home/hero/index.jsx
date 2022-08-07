@@ -75,9 +75,9 @@ const Hero = () => {
           pb="2"
         >
           I’m an inspiring full-stack engineer, a designer, and a content
-          creator. I work at{" "}
+          creator. I do{" "}
           <Text cursor={"pointer"} as="u" color={twitter}>
-            Digital Laboratory Myanmar
+            Web development
           </Text>{" "}
           as a developer, and love teaching and sharing about technology,
           computer science and design.
