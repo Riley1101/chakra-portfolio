@@ -9,7 +9,7 @@ import {
   Flex,
   useColorModeValue,
 } from "@chakra-ui/react";
-const Card = () => {
+const Card = ({ data }) => {
   const bg = useColorModeValue("#eff2f9", "gray.900");
   return (
     <Flex
@@ -17,16 +17,21 @@ const Card = () => {
       backgroundColor={bg}
       h="full"
       p={[6, 10]}
-      justifyContent="flex-end"
+      justifyContent="flex-start"
     >
       <VStack alignItems={"flex-start"} justifyContent="flex-end">
-        <Badge colorScheme="green">React</Badge>
+        <HStack flexWrap={"wrap"} gap="1">
+          {data?.categories.map((cate) => (
+            <Badge colorScheme="green" key={cate.id}>
+              {cate.name}
+            </Badge>
+          ))}
+        </HStack>
+
         <Text as="h2" fontSize={"2xl"} fontWeight="bold">
-          What are time and space complexities ?
+          {data?.title}
         </Text>
-        <Text as="p">
-          In this article, we gonna talk a short trip to what Big O really is?
-        </Text>
+        <Text as="p">{data?.description}</Text>
       </VStack>
     </Flex>
   );

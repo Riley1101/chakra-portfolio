@@ -47,9 +47,6 @@ const Video = () => {
       </VStack>
       <IconButton
         transition={"all 250ms ease"}
-        position={"absolute"}
-        top="3em"
-        right="3em"
         aria-label="Search database"
         borderRadius={"1em"}
         _hover={{

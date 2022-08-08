@@ -1,23 +1,17 @@
 import {
   Box,
   Heading,
-  Stack,
-  Show,
   VStack,
   Text,
-  HStack,
   IconButton,
   useColorModeValue,
   Button,
-  Link,
   Grid,
   GridItem,
-  AspectRatio,
 } from "@chakra-ui/react";
-import Image from "next/image";
 import { FiTerminal } from "react-icons/fi";
 import { HiOutlineCode } from "react-icons/hi";
-const Snippets = () => {
+const Snippets = ({ snippets }) => {
   let cardBg = useColorModeValue("blue.50", "gray.900");
   let iconColor = useColorModeValue("#fff", "gray.800");
   return (
@@ -37,7 +31,7 @@ const Snippets = () => {
         w="full"
         alignItems={"flex-start"}
       >
-        {[1, 2, 3, 4, 5, 6].map((ele) => (
+        {snippets.map((ele) => (
           <GridItem key={ele}>
             <VStack
               borderRadius={"3em"}
@@ -47,7 +41,7 @@ const Snippets = () => {
                 borderRadius: "1.5em",
               }}
               alignItems={"flex-start"}
-              key={ele}
+              key={ele.id}
               cursor={"pointer"}
               w="full"
               spacing="0em"
@@ -61,10 +55,10 @@ const Snippets = () => {
                   icon={<FiTerminal />}
                 />
                 <Text as="h2" fontSize={"xl"} fontWeight="bold">
-                  Next.js In 2022 !
+                  {ele.title}
                 </Text>
                 <Text as="p" color={"gray.500"}>
-                  How to create a new Next JS app, install and setup Chakra UI.
+                  {ele.description}
                 </Text>
               </Box>
             </VStack>

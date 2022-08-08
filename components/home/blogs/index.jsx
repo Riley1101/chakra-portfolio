@@ -1,19 +1,16 @@
 import {
   Box,
   Heading,
-  Stack,
-  Show,
   VStack,
   Text,
   HStack,
   useColorModeValue,
   Button,
-  Link,
 } from "@chakra-ui/react";
 import { FaRegNewspaper } from "react-icons/fa";
-
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-const Blogs = () => {
+import readingTime from "reading-time";
+import dateFormat from "dateformat";
+const Blogs = ({ posts }) => {
   let cardBg = useColorModeValue("blue.50", "gray.900");
   return (
     <Box p="4" my={["1.5em"]} alignItems={"flex-start"}>
@@ -26,14 +23,14 @@ const Blogs = () => {
         </Text>
       </VStack>
       <VStack spacing={7} w="full" alignItems={"flex-start"}>
-        {[1, 2, 3].map((ele) => (
+        {posts.map((ele) => (
           <VStack
             transition={"all 250ms ease"}
             _hover={{
               borderRadius: "1.5em",
             }}
             alignItems={"flex-start"}
-            key={ele}
+            key={ele.id}
             bg={cardBg}
             cursor={"pointer"}
             w="full"
@@ -43,14 +40,14 @@ const Blogs = () => {
             spacing=".3em"
           >
             <Text fontSize="xl" fontWeight="semibold">
-              Creating An Alert System In React
+              {ele.title}
             </Text>
             <HStack fontSize={"sm"} color="gray.500">
-              <Text>5 min read</Text>
+              <Text>{readingTime(ele.content).text}</Text>
               <Text>-</Text>
-              <Text>Jun 12 2022</Text>
+              <Text>{dateFormat(ele.publishedAt, "mediumDate")}</Text>
             </HStack>
-            <Text>How to create a reuseable alert system with React ?</Text>
+            <Text>{ele.description}</Text>
           </VStack>
         ))}
       </VStack>

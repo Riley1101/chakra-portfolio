@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import SpaceGrid from "@/components/common/grid";
+import SpaceGrid from "@/components/space/grid";
 import MainContainer from "@/layouts/container";
 
 const Space = () => {
