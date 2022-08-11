@@ -4,10 +4,15 @@ import {
   IconButton,
   HStack,
   useColorMode,
+  Kbd,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { SearchIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import Link from "next/link";
+import NavigationModal from "@/components/common/modal";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const navigator = useDisclosure();
   return (
     <Box
       display="flex"
@@ -18,11 +23,15 @@ const Header = () => {
       flexDirection="row"
       alignItems={"center"}
     >
-      <Heading mr="auto" fontSize={"2xl"}>
-        ArkarDev
-      </Heading>
-      <HStack>
-        <IconButton aria-label="Menu" icon={<SearchIcon />} />
+      <Link href="/">
+        <Heading mr="auto" cursor={"pointer"} fontSize={"2xl"}>
+          ArkarDev
+        </Heading>
+      </Link>
+
+      <HStack spacing={"4"}>
+        <NavigationModal {...navigator} />
+
         <IconButton
           onClick={toggleColorMode}
           aria-label="Menu"

@@ -10,10 +10,10 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import Link from "next/link";
-const Card = ({ data }) => {
+const SnippetCard = ({ data }) => {
   const bg = useColorModeValue("#eff2f9", "gray.900");
   return (
-    <Link href={`/blog/${data.slug}`}>
+    <Link href={`/snippets/${data.slug}`}>
       <Flex
         w="full"
         backgroundColor={bg}
@@ -39,4 +39,4 @@ const Card = ({ data }) => {
     </Link>
   );
 };
-export default Card;
+export default SnippetCard;

@@ -7,6 +7,7 @@ import {
   useColorModeValue,
   Button,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import { FaRegNewspaper } from "react-icons/fa";
 import readingTime from "reading-time";
 import dateFormat from "dateformat";
@@ -24,31 +25,33 @@ const Blogs = ({ posts }) => {
       </VStack>
       <VStack spacing={7} w="full" alignItems={"flex-start"}>
         {posts.map((ele) => (
-          <VStack
-            transition={"all 250ms ease"}
-            _hover={{
-              borderRadius: "1.5em",
-            }}
-            alignItems={"flex-start"}
-            key={ele.id}
-            bg={cardBg}
-            cursor={"pointer"}
-            w="full"
-            p="8"
-            px="9"
-            borderRadius={"3em"}
-            spacing=".3em"
-          >
-            <Text fontSize="xl" fontWeight="semibold">
-              {ele.title}
-            </Text>
-            <HStack fontSize={"sm"} color="gray.500">
-              <Text>{readingTime(ele.content).text}</Text>
-              <Text>-</Text>
-              <Text>{dateFormat(ele.publishedAt, "mediumDate")}</Text>
-            </HStack>
-            <Text>{ele.description}</Text>
-          </VStack>
+          <Link href={`/blog/${ele.slug}`}>
+            <VStack
+              transition={"all 250ms ease"}
+              _hover={{
+                borderRadius: "1.5em",
+              }}
+              alignItems={"flex-start"}
+              key={ele.id}
+              bg={cardBg}
+              cursor={"pointer"}
+              w="full"
+              p="8"
+              px="9"
+              borderRadius={"3em"}
+              spacing=".3em"
+            >
+              <Text fontSize="xl" fontWeight="semibold">
+                {ele.title}
+              </Text>
+              <HStack fontSize={"sm"} color="gray.500">
+                <Text>{readingTime(ele.content).text}</Text>
+                <Text>-</Text>
+                <Text>{dateFormat(ele.publishedAt, "mediumDate")}</Text>
+              </HStack>
+              <Text>{ele.description}</Text>
+            </VStack>
+          </Link>
         ))}
       </VStack>
       <Box w="full" mt="7" display={"flex"} justifyContent="flex-end">

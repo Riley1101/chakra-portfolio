@@ -1,16 +1,16 @@
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 import {
   Box,
-  Heading,
-  Stack,
-  Show,
-  VStack,
-  Text,
-  HStack,
-  useColorModeValue,
   Button,
+  Heading,
+  HStack,
+  Stack,
+  Text,
+  useColorModeValue,
+  VStack,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import { ExternalLinkIcon } from "@chakra-ui/icons";
+import Link from "next/link";
 let style = `
 .box:before {
     content: "";
@@ -83,43 +83,49 @@ const Hero = () => {
           computer science and design.
         </Text>
         <HStack>
-          <Button
-            size={"md"}
-            rightIcon={<ExternalLinkIcon />}
-            variant="outline"
-            border={"none"}
-            color={github}
-            _hover={{
-              textDecoration: "underline",
-              background: bg,
-            }}
-          >
-            Github
-          </Button>
-          <Button
-            rightIcon={<ExternalLinkIcon />}
-            variant="outline"
-            border={"none"}
-            color={twitter}
-            _hover={{
-              textDecoration: "underline",
-              background: bg,
-            }}
-          >
-            Twitter
-          </Button>
-          <Button
-            rightIcon={<ExternalLinkIcon />}
-            variant="outline"
-            border={"none"}
-            color={linkedIn}
-            _hover={{
-              textDecoration: "underline",
-              background: bg,
-            }}
-          >
-            LinkedIn
-          </Button>
+          <a target={"_blank"} href="https://arkardev.space/github">
+            <Button
+              size={"md"}
+              rightIcon={<ExternalLinkIcon />}
+              variant="outline"
+              border={"none"}
+              color={github}
+              _hover={{
+                textDecoration: "underline",
+                background: bg,
+              }}
+            >
+              Github
+            </Button>
+          </a>
+          <a target={"_blank"} href="https://arkardev.space/twitter">
+            <Button
+              rightIcon={<ExternalLinkIcon />}
+              variant="outline"
+              border={"none"}
+              color={twitter}
+              _hover={{
+                textDecoration: "underline",
+                background: bg,
+              }}
+            >
+              Twitter
+            </Button>
+          </a>
+          <a target={"_blank"} href="https://arkardev.space/linkedin">
+            <Button
+              rightIcon={<ExternalLinkIcon />}
+              variant="outline"
+              border={"none"}
+              color={linkedIn}
+              _hover={{
+                textDecoration: "underline",
+                background: bg,
+              }}
+            >
+              LinkedIn
+            </Button>
+          </a>
         </HStack>
       </VStack>
       <Box

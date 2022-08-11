@@ -1,17 +1,18 @@
+import BlogCard from "@/components/common/card";
+import SnippetCard from "@/components/common/snippetCard";
+import useSpaceQuery from "@/components/space/query";
+import { gql } from "@apollo/client";
 import {
-  Grid,
   Box,
-  Heading,
-  GridItem,
-  VStack,
   Button,
+  Grid,
+  GridItem,
+  Heading,
   Skeleton,
   Text,
+  VStack,
 } from "@chakra-ui/react";
-import BlogCard from "@/components/common/card";
 import { HiOutlineCode } from "react-icons/hi";
-import { gql } from "@apollo/client";
-import useSpaceQuery from "@/components/space/query";
 const Snippets = () => {
   const SNIPPET_QUERY = gql`
     query Snippet_Query($limit: Int) {
@@ -59,7 +60,7 @@ const Snippets = () => {
             }}
           >
             <Skeleton isLoaded={!loading} w="full" h="full">
-              <BlogCard data={post} />
+              <SnippetCard data={post} />
             </Skeleton>
           </GridItem>
         ))}

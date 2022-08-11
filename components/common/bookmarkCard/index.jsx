@@ -1,19 +1,15 @@
 import {
-  Grid,
-  Box,
-  GridItem,
-  Text,
-  HStack,
   Badge,
-  VStack,
   Flex,
+  HStack,
+  Text,
   useColorModeValue,
+  VStack,
 } from "@chakra-ui/react";
-import Link from "next/link";
-const Card = ({ data }) => {
+const BookmarkCard = ({ data }) => {
   const bg = useColorModeValue("#eff2f9", "gray.900");
   return (
-    <Link href={`/blog/${data.slug}`}>
+    <a href={`${data.link}`} target="_blank">
       <Flex
         w="full"
         backgroundColor={bg}
@@ -36,7 +32,7 @@ const Card = ({ data }) => {
           <Text as="p">{data?.description}</Text>
         </VStack>
       </Flex>
-    </Link>
+    </a>
   );
 };
-export default Card;
+export default BookmarkCard;

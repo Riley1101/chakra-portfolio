@@ -9,6 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import BlogCard from "@/components/common/card";
+import BookmarkCard from "@/components/common/bookmarkCard";
 import { HiOutlineCode } from "react-icons/hi";
 import { gql } from "@apollo/client";
 import useSpaceQuery from "@/components/space/query";
@@ -29,6 +30,7 @@ const Tools = () => {
     }
   `;
   const { data, loading, loadMore } = useSpaceQuery(TOOL_QUERY, 5);
+  console.log(data);
   return (
     <Box my="8">
       <VStack alignItems={"flex-start"} spacing=".2em" my="7">
@@ -59,7 +61,7 @@ const Tools = () => {
             }}
           >
             <Skeleton isLoaded={!loading} w="full" h="full">
-              <BlogCard data={post} />
+              <BookmarkCard data={post} />
             </Skeleton>
           </GridItem>
         ))}

@@ -12,7 +12,6 @@ const useSpaceQuery = (QUERY, lim = 5) => {
   const loadMore = () => {
     setLimit(limit + 5);
   };
-  console.log(data);
   return {
     data,
     loading,

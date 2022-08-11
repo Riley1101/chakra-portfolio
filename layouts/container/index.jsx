@@ -10,7 +10,7 @@ const MainContainer = ({ children }) => {
         w={["100%", "85%"]}
         mx={"auto"}
         lineHeight="1.7"
-        fontFamily={"'Inter', sans-serif"}
+        fontFamily={"'Roboto', sans-serif"}
       >
         <Header />
         {children}
