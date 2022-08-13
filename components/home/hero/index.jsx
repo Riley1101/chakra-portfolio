@@ -83,7 +83,11 @@ const Hero = () => {
           computer science and design.
         </Text>
         <HStack>
-          <a target={"_blank"} href="https://arkardev.space/github">
+          <a
+            target={"_blank"}
+            rel="noreferrer"
+            href="https://arkardev.space/github"
+          >
             <Button
               size={"md"}
               rightIcon={<ExternalLinkIcon />}
@@ -98,7 +102,11 @@ const Hero = () => {
               Github
             </Button>
           </a>
-          <a target={"_blank"} href="https://arkardev.space/twitter">
+          <a
+            target={"_blank"}
+            rel="noreferrer"
+            href="https://arkardev.space/twitter"
+          >
             <Button
               rightIcon={<ExternalLinkIcon />}
               variant="outline"
@@ -112,7 +120,11 @@ const Hero = () => {
               Twitter
             </Button>
           </a>
-          <a target={"_blank"} href="https://arkardev.space/linkedin">
+          <a
+            target={"_blank"}
+            rel="noreferrer"
+            href="https://arkardev.space/linkedin"
+          >
             <Button
               rightIcon={<ExternalLinkIcon />}
               variant="outline"

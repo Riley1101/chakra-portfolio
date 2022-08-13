@@ -121,6 +121,7 @@ const useMarkdownTheme = () => {
           height={["100%", "auto"]}
           my="8"
           mx="auto"
+          alt={""}
           layout="fill"
         />
       );

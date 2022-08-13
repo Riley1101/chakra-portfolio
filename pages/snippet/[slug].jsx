@@ -13,27 +13,24 @@ const BlogDetail = ({ data }) => {
 };
 
 export default BlogDetail;
-const ALL_POSTS = gql`
-  query ALL_POSTS {
-    posts {
+const ALL_QUERIES = gql`
+  query ALL_QUERIES {
+    snippets {
       id
       slug
+      title
     }
   }
 `;
-const POST_DETAIL_QUERY = gql`
-  query SPECIFIC_QUERT($slug: String) {
-    post(where: { slug: $slug }) {
+const SNIPPET_DETAIL = gql`
+  query SNIPPET_SPECIFIC($slug: String) {
+    snippet(where: { slug: $slug }) {
       id
       title
       description
       content
-      toc
       slug
       publishedAt
-      coverImage {
-        url
-      }
       categories {
         name
         id
@@ -43,30 +40,31 @@ const POST_DETAIL_QUERY = gql`
 `;
 export async function getStaticProps({ params }) {
   const { data } = await client.query({
-    query: POST_DETAIL_QUERY,
+    query: SNIPPET_DETAIL,
     variables: {
       slug: params.slug,
     },
   });
+
   return {
     props: {
-      data: data.post,
+      data: data.snippet,
     },
   };
 }
 
 export async function getStaticPaths() {
   const { data } = await client.query({
-    query: ALL_POSTS,
+    query: ALL_QUERIES,
   });
-
-  let paths = data.posts.map((post) => {
+  let paths = data.snippets.map((snp) => {
     return {
       params: {
-        slug: post.slug,
+        slug: snp.slug,
       },
     };
   });
+
   return {
     paths: paths,
     fallback: false,

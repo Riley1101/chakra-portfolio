@@ -25,14 +25,13 @@ const Blogs = ({ posts }) => {
       </VStack>
       <VStack spacing={7} w="full" alignItems={"flex-start"}>
         {posts.map((ele) => (
-          <Link href={`/blog/${ele.slug}`}>
+          <Link href={`/blog/${ele.slug}`} key={ele.id}>
             <VStack
               transition={"all 250ms ease"}
               _hover={{
                 borderRadius: "1.5em",
               }}
               alignItems={"flex-start"}
-              key={ele.id}
               bg={cardBg}
               cursor={"pointer"}
               w="full"

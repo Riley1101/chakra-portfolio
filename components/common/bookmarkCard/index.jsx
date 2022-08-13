@@ -9,7 +9,7 @@ import {
 const BookmarkCard = ({ data }) => {
   const bg = useColorModeValue("#eff2f9", "gray.900");
   return (
-    <a href={`${data.link}`} target="_blank">
+    <a href={`${data.link}`} target="_blank" rel="noreferrer">
       <Flex
         w="full"
         backgroundColor={bg}

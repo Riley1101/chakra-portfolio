@@ -1,35 +1,29 @@
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  Kbd,
-} from "@chakra-ui/react";
-import { autocomplete } from "@algolia/autocomplete-js";
-import { useEffect } from "react";
+import { Kbd } from "@chakra-ui/react";
+import { Text, InputGroup, Input, InputRightElement } from "@chakra-ui/react";
 import "@algolia/autocomplete-theme-classic";
+import { SearchIcon } from "@chakra-ui/icons";
+import { connectSearchBox } from "instantsearch.js/es/connectors";
+const Search = connectSearchBox(({ refine }) => {
+  return (
+    <InputGroup w="full">
+      <Input
+        placeholder="Search"
+        onChange={(e) => refine(e.currentTarget.value)}
+        type="search"
+      />
+      <InputRightElement>
+        <SearchIcon />
+      </InputRightElement>
+    </InputGroup>
+  );
+});
 
 function NavigationModal({ isOpen, onOpen, onClose }) {
   return (
     <>
-      <span onClick={onOpen}>
+      <Text as="span" cursor={"pointer"} onClick={onOpen}>
         <Kbd>ctrl </Kbd> + <Kbd>K</Kbd>
-      </span>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody id="autocomplete">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio optio
-            facere harum minima amet incidunt beatae, molestiae laudantium
-            deleniti repellendus, ipsa, nulla blanditiis veritatis! Eius non
-            voluptatum accusantium id neque?
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      </Text>
     </>
   );
 }

@@ -30,7 +30,6 @@ const Tools = () => {
     }
   `;
   const { data, loading, loadMore } = useSpaceQuery(TOOL_QUERY, 5);
-  console.log(data);
   return (
     <Box my="8">
       <VStack alignItems={"flex-start"} spacing=".2em" my="7">

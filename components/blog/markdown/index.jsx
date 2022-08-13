@@ -8,11 +8,9 @@ const BlogContent = ({ data }) => {
 
   return (
     <Box w={["100%", "70%"]} mx="auto" p="4">
-      <ReactMarkdown
-        components={ChakraUIRenderer(theme)}
-        children={data?.content}
-        skipHtml
-      />
+      <ReactMarkdown components={ChakraUIRenderer(theme)} skipHtml>
+        {data?.content}
+      </ReactMarkdown>
     </Box>
   );
 };

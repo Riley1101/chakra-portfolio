@@ -13,7 +13,7 @@ import Link from "next/link";
 const SnippetCard = ({ data }) => {
   const bg = useColorModeValue("#eff2f9", "gray.900");
   return (
-    <Link href={`/snippets/${data.slug}`}>
+    <Link href={`/snippet/${data.slug}`}>
       <Flex
         w="full"
         backgroundColor={bg}
