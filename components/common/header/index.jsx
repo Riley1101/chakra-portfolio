@@ -3,6 +3,7 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import {
   Box,
   Heading,
+  Tooltip,
   HStack,
   IconButton,
   Kbd,
@@ -15,15 +16,15 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Link from "next/link";
-
-import { getAlgoliaResults } from "@algolia/autocomplete-js";
+import { ImCommand } from "react-icons/im";
 import AutoComplete from "@/components/common/search/AutoComplete";
-
-import searchClient from "@/utils/search/client";
+import { useHotkeys } from "react-hotkeys-hook";
 
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onClose, onOpen } = useDisclosure();
+  useHotkeys("ctrl+/", () => onOpen());
+
   return (
     <Box
       display="flex"
@@ -39,47 +40,22 @@ const Header = () => {
           ArkarDev
         </Heading>
       </Link>
-      <Modal isOpen={isOpen} onClose={onClose} size={["xs", "md"]}>
+      <Modal isOpen={isOpen} onClose={onClose} size={["xs", "lg"]}>
         <ModalOverlay />
         <ModalContent maxH={"400px"} overflowY="auto">
-          <ModalBody>
-            <AutoComplete
-              openOnFocus={true}
-              getSources={({ query }) => [
-                {
-                  sourceId: "products",
-                  getItems() {
-                    return getAlgoliaResults({
-                      searchClient,
-                      queries: [
-                        {
-                          indexName: "blogs",
-                          query,
-                        },
-                        {
-                          indexName: "snippets",
-                          query,
-                        },
-                      ],
-                    });
-                  },
-                  templates: {
-                    item({ item, components }) {
-                      console.log(item, components);
-                      return <div hit={item} components={components} />;
-                    },
-                  },
-                },
-              ]}
-            />
+          <ModalBody px="1em">
+            <AutoComplete />
           </ModalBody>
         </ModalContent>
       </Modal>
 
       <HStack spacing={"4"}>
-        <Text as="span" cursor={"pointer"} onClick={onOpen}>
-          <Kbd>ctrl </Kbd> + <Kbd>K</Kbd>
-        </Text>
+        <Tooltip hasArrow label="Ctrl + /" placement="auto">
+          <IconButton onClick={onOpen}>
+            <ImCommand />
+          </IconButton>
+        </Tooltip>
+
         <IconButton
           onClick={toggleColorMode}
           aria-label="Menu"
@@ -91,62 +67,3 @@ const Header = () => {
 };
 
 export default Header;
-
-// const Product = ({ hit, components }) => {
-//   return (
-//     <VStack alignItems={"start"} w="full">
-//       {hit.posts && (
-//         <Box w="full">
-//           <Text mt="4" mb="2" as="p" fontSize={"lg"} fontWeight="bold">
-//             Blogs
-//           </Text>
-//           <VStack>
-//             {hit.posts.map((post) => (
-//               <Button
-//                 _hover={{
-//                   background: "blue.500",
-//                   color: "#fff",
-//                 }}
-//                 py="6"
-//                 size={"md"}
-//                 w="full"
-//                 rightIcon={<ExternalLinkIcon />}
-//                 leftIcon={<ExternalLinkIcon />}
-//               >
-//                 <Text textAlign="left" w={"full"} fontWeight="normal">
-//                   {post.title}
-//                 </Text>
-//               </Button>
-//             ))}
-//           </VStack>
-//         </Box>
-//       )}
-//       {hit.snippets && (
-//         <Box w="full">
-//           <Text mt="4" mb="2" as="p" fontSize={"lg"} fontWeight="bold">
-//             Snippets
-//           </Text>
-//           <VStack>
-//             {hit.snippets.map((post) => (
-//               <Button
-//                 _hover={{
-//                   background: "blue.500",
-//                   color: "#fff",
-//                 }}
-//                 py="6"
-//                 size={"md"}
-//                 w="full"
-//                 rightIcon={<ExternalLinkIcon />}
-//                 leftIcon={<ExternalLinkIcon />}
-//               >
-//                 <Text textAlign="left" w={"full"} fontWeight="normal">
-//                   {post.title}
-//                 </Text>
-//               </Button>
-//             ))}
-//           </VStack>
-//         </Box>
-//       )}
-//     </VStack>
-//   );
-// };

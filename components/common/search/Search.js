@@ -24,6 +24,7 @@ function Search({ refine }) {
       <Input
         placeholder="Search"
         type="search"
+        variant={"outline"}
         onChange={(e) => refine(e.currentTarget.value)}
       />
       <InputRightElement>

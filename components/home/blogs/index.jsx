@@ -7,6 +7,7 @@ import {
   useColorModeValue,
   Button,
 } from "@chakra-ui/react";
+
 import Link from "next/link";
 import { FaRegNewspaper } from "react-icons/fa";
 import readingTime from "reading-time";
@@ -54,18 +55,20 @@ const Blogs = ({ posts }) => {
         ))}
       </VStack>
       <Box w="full" mt="7" display={"flex"} justifyContent="flex-end">
-        <Button
-          transition={"all 250ms ease"}
-          rounded={"1em"}
-          _hover={{
-            rounded: ".5em",
-          }}
-          textAlign={"right"}
-          rightIcon={<FaRegNewspaper />}
-          variant="outline"
-        >
-          More articles
-        </Button>
+        <Link href={"/space"}>
+          <Button
+            transition={"all 250ms ease"}
+            rounded={"1em"}
+            _hover={{
+              rounded: ".5em",
+            }}
+            textAlign={"right"}
+            rightIcon={<FaRegNewspaper />}
+            variant="outline"
+          >
+            More articles
+          </Button>
+        </Link>
       </Box>
     </Box>
   );

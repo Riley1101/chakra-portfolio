@@ -8,13 +8,13 @@ import {
   HStack,
   useColorModeValue,
   Button,
-  Link,
   Grid,
   GridItem,
   IconButton,
   AspectRatio,
 } from "@chakra-ui/react";
 import Image from "next/image";
+import Link from "next/link";
 import { FiPlayCircle } from "react-icons/fi";
 const Videos = () => {
   let cardBorder = useColorModeValue("gray.100", "gray.700");
@@ -105,18 +105,20 @@ const Videos = () => {
         ))}
       </Grid>
       <Box w="full" mt="7" display={"flex"} justifyContent="flex-end">
-        <Button
-          transition={"all 250ms ease"}
-          rounded={"1em"}
-          _hover={{
-            rounded: ".5em",
-          }}
-          textAlign={"right"}
-          rightIcon={<FiPlayCircle />}
-          variant="outline"
-        >
-          More videos
-        </Button>
+        <Link href="/space">
+          <Button
+            transition={"all 250ms ease"}
+            rounded={"1em"}
+            _hover={{
+              rounded: ".5em",
+            }}
+            textAlign={"right"}
+            rightIcon={<FiPlayCircle />}
+            variant="outline"
+          >
+            More videos
+          </Button>
+        </Link>
       </Box>
     </Box>
   );

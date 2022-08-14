@@ -60,19 +60,34 @@ export default function LargeWithAppLinksAndSocial() {
           align={{ md: "center" }}
         >
           <Stack direction={"row"} spacing={6}>
-            <SocialButton label={"Twitter"} href={"#"}>
+            <SocialButton
+              label={"Twitter"}
+              href={"https://arkardev.space/twitter"}
+            >
               <FaTwitter />
             </SocialButton>
-            <SocialButton label={"YouTube"} href={"#"}>
+            <SocialButton
+              label={"YouTube"}
+              href={"https://arkardev.space/youtube"}
+            >
               <FaYoutube />
             </SocialButton>
-            <SocialButton label={"Instagram"} href={"#"}>
+            <SocialButton
+              label={"Instagram"}
+              href={"https://arkardev.space/instagram"}
+            >
               <FaInstagram />
             </SocialButton>
-            <SocialButton label={"Instagram"} href={"#"}>
+            <SocialButton
+              label={"Github"}
+              href={"https://arkardev.space/github"}
+            >
               <FaGithub />
             </SocialButton>
-            <SocialButton label={"Instagram"} href={"#"}>
+            <SocialButton
+              label={"facebook"}
+              href={"https://arkardev.space/facebook"}
+            >
               <FaFacebook />
             </SocialButton>
           </Stack>

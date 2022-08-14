@@ -1,23 +1,28 @@
 import React from "react";
 import searchClient from "@/utils/search/client";
-
-import {
-  Box,
-  Text,
-  VStack,
-  InputGroup,
-  Input,
-  InputRightElement,
-} from "@chakra-ui/react";
-import { SearchIcon, ExternalLinkIcon, AttachmentIcon } from "@chakra-ui/icons";
+import { createQuerySuggestionsPlugin } from "@algolia/autocomplete-plugin-query-suggestions";
+import { Box, InputGroup, Input, InputRightElement } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
 import { createAutocomplete } from "@algolia/autocomplete-core";
 import { getAlgoliaResults } from "@algolia/autocomplete-preset-algolia";
+import Suggession from "@/components/common/search/Suggesstion";
+
+import Hints from "@/components/common/search/hint";
 function Autocomplete() {
   // (1) Create a React state.
   const [autocompleteState, setAutocompleteState] = React.useState({});
+  const querySuggestionsPlugin = createQuerySuggestionsPlugin({
+    searchClient,
+    indexName: "blogs_query_suggestions",
+    getSearchParams({ state }) {
+      return { hitsPerPage: state.query ? 5 : 10 };
+    },
+  });
+
   const autocomplete = React.useMemo(
     () =>
       createAutocomplete({
+        plugins: [querySuggestionsPlugin],
         onStateChange({ state }) {
           // (2) Synchronize the Autocomplete state with the React state.
           setAutocompleteState(state);
@@ -27,7 +32,27 @@ function Autocomplete() {
           return [
             // (3) Use an Algolia index source.
             {
-              sourceId: "blogs",
+              sourceId: "goto",
+              getItemInputValue({ item }) {
+                return item.query;
+              },
+              getItems({ query }) {
+                return getAlgoliaResults({
+                  searchClient,
+                  queries: [
+                    {
+                      indexName: "navigation",
+                      query,
+                    },
+                  ],
+                });
+              },
+              getItemUrl({ item }) {
+                return item.url;
+              },
+            },
+            {
+              sourceId: "blog",
               getItemInputValue({ item }) {
                 return item.query;
               },
@@ -39,10 +64,46 @@ function Autocomplete() {
                       indexName: "blogs",
                       query,
                     },
-                    // {
-                    //   indexName: "snippets",
-                    //   query,
-                    // },
+                  ],
+                });
+              },
+              getItemUrl({ item }) {
+                return item.url;
+              },
+            },
+            {
+              sourceId: "snippet",
+              getItemInputValue({ item }) {
+                return item.query;
+              },
+              getItems({ query }) {
+                return getAlgoliaResults({
+                  searchClient,
+                  queries: [
+                    {
+                      indexName: "snippets",
+                      query,
+                    },
+                  ],
+                });
+              },
+              getItemUrl({ item }) {
+                return item.url;
+              },
+            },
+            {
+              sourceId: "bookmarks",
+              getItemInputValue({ item }) {
+                return item.query;
+              },
+              getItems({ query }) {
+                return getAlgoliaResults({
+                  searchClient,
+                  queries: [
+                    {
+                      indexName: "bookmarks",
+                      query,
+                    },
                   ],
                 });
               },
@@ -60,6 +121,7 @@ function Autocomplete() {
     <Box w="full" {...autocomplete.getRootProps({})}>
       <InputGroup w="full" my="2">
         <Input
+          variant="flushed"
           placeholder="Search"
           type="search"
           {...autocomplete.getInputProps({})}
@@ -68,63 +130,17 @@ function Autocomplete() {
           <SearchIcon />
         </InputRightElement>
       </InputGroup>
-      <div>
+      <Box pb="2">
+        {autocompleteState.query < 4 && <Suggession />}
         {autocompleteState.isOpen &&
-          autocompleteState.collections.map((collection, index) => {
+          autocompleteState.collections.map((collection) => {
             const { source, items } = collection;
-            console.log(source);
             return (
-              <VStack alignItems={"start"} w="full" key={source.sourceId}>
-                {items.map((itm) => {
-                  return (
-                    <Box w="100%" key={itm.__autocomplete_indexName}>
-                      <Text
-                        mt="4"
-                        mb="2"
-                        as="p"
-                        fontSize={"lg"}
-                        fontWeight="bold"
-                      >
-                        {itm.__autocomplete_indexName}
-                      </Text>
-                      <VStack>
-                        {itm.posts.map((post) => (
-                          <Box
-                            cursor={"pointer"}
-                            key={post.id}
-                            rounded={"md"}
-                            px="4"
-                            _hover={{
-                              background: "blue.500",
-                              color: "#fff",
-                            }}
-                            py="4"
-                            size={"md"}
-                            w="full"
-                            gap={2}
-                            overflow="hidden"
-                            textAlign="left"
-                            alignItems={"center"}
-                            display={"flex"}
-                            flexWrap="nowrap"
-                          >
-                            <AttachmentIcon />
-                            <Box basis="80%" flexGrow={"1"}>
-                              {post.title}
-                            </Box>
-                            <ExternalLinkIcon />
-                          </Box>
-                        ))}
-                      </VStack>
-                    </Box>
-                  );
-                })}
-              </VStack>
+              <Hints source={source} items={items} key={source.sourceId} />
             );
           })}
-      </div>
+      </Box>
     </Box>
   );
-  // ...
 }
 export default Autocomplete;

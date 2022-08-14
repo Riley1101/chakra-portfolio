@@ -68,18 +68,20 @@ const Snippets = ({ snippets }) => {
         ))}
       </Grid>
       <Box w="full" mt="7" display={"flex"} justifyContent="flex-end">
-        <Button
-          transition={"all 250ms ease"}
-          rounded={"1em"}
-          _hover={{
-            rounded: ".5em",
-          }}
-          textAlign={"right"}
-          rightIcon={<HiOutlineCode />}
-          variant="outline"
-        >
-          More codes
-        </Button>
+        <Link href="/space">
+          <Button
+            transition={"all 250ms ease"}
+            rounded={"1em"}
+            _hover={{
+              rounded: ".5em",
+            }}
+            textAlign={"right"}
+            rightIcon={<HiOutlineCode />}
+            variant="outline"
+          >
+            More codes
+          </Button>
+        </Link>
       </Box>
     </Box>
   );
