@@ -41,7 +41,7 @@ export async function getStaticProps() {
     query: HOME_QUERY,
   });
   let url = `${server}/api/playlist/PLJznl3g92X7P4T3S2lLW8Ws43KfjPCmYs`;
-  let = await fetch(url)
+  let response = await fetch(url)
     .then((res) => res.json())
     .then((res) => res);
 
