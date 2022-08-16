@@ -1,12 +1,20 @@
 import MainContainer from "@/layouts/container";
-import Meta from "@/components/blog/meta";
+import Banner from "@/components/blog/meta";
 import { gql } from "@apollo/client";
 import client from "@/utils/query/client";
 import BlogContent from "@/components/blog/markdown";
+import Meta from "@/components/common/meta";
 const BlogDetail = ({ data }) => {
+  let defaultMeta = {
+    title: data.title,
+    description: data.description,
+    url: `${process.env.NEXT_PUBLIC_DOMAIN}/snippet/${data.slug}`,
+    image: "/static/general/snippet.jpg",
+  };
   return (
     <MainContainer>
-      <Meta data={data} />
+      <Meta meta={defaultMeta} />
+      <Banner data={data} />
       <BlogContent data={data} />
     </MainContainer>
   );

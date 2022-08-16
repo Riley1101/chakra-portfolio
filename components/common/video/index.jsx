@@ -8,19 +8,23 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FiPlayCircle } from "react-icons/fi";
-const Video = () => {
+const Video = ({ video }) => {
+  console.log(video);
   const bg = useColorModeValue("#eff2f9", "gray.900");
   const text = useColorModeValue("#eff2f9", "#eff2f9");
+  let image =
+    video?.snippet?.thumbnails?.standard?.url || "/static/general/snippet.jpg";
   return (
     <Flex
       w="full"
-      backgroundColor={bg}
+      // backgroundColor={bg}
       h="full"
       p={[6, 10]}
       justifyContent="flex-end"
       position={"relative"}
-      backgroundImage={'url("/static/general/background.jpg")'}
-      backgroundSize="cover"
+      backgroundImage={`url("${image}")`}
+      backgroundSize={"110%"}
+      backgroundPosition={"center"}
     >
       <Box
         w="full"
@@ -36,14 +40,13 @@ const Video = () => {
         justifyContent="flex-end"
         zIndex={10}
         color={text}
+        w="100%"
       >
         <Badge colorScheme="green">React</Badge>
         <Text as="h2" fontSize={"2xl"} fontWeight="bold">
-          What are time and space complexities ?
+          {video.snippet.title}
         </Text>
-        <Text as="p">
-          In this article, we gonna talk a short trip to what Big O really is?
-        </Text>
+        <Text as="p">{video.snippet.description}</Text>
       </VStack>
       <IconButton
         transition={"all 250ms ease"}

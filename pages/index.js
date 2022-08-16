@@ -6,6 +6,7 @@ import Video from "@/components/home/videos";
 import { gql } from "@apollo/client";
 import client from "@/utils/query/client";
 import server from "@/utils/server";
+import Meta from "@/components/common/meta";
 const HOME_QUERY = gql`
   query MyQuery {
     posts(last: 3) {
@@ -29,6 +30,7 @@ const HOME_QUERY = gql`
 export default function Home({ posts, snippets, videos }) {
   return (
     <MainContainer>
+      <Meta />
       <Hero />
       <Blogs posts={posts} />
       <Snippets snippets={snippets} />
