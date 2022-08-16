@@ -9,8 +9,18 @@ import {
 } from "@chakra-ui/react";
 import VideoCard from "@/components/common/video";
 import { RiVideoLine } from "react-icons/ri";
-
+import { useEffect, useState } from "react";
+import server from "@/utils/server";
 const Videos = () => {
+  const [videos, setVideos] = useState([]);
+  const [limit, setLimit] = useState(5);
+
+  // useEffect(() => {
+  //   fetch(`${server}/api/playlist?limit=${limit}`)
+  //     .then((res) => res.json())
+  //     .then((res) => setVideos(re));
+  // }, []);
+  // console.log(videos);
   return (
     <Box my="8">
       <VStack alignItems={"flex-start"} spacing=".2em" my="7">
