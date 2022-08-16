@@ -41,13 +41,13 @@ export async function getStaticProps() {
     query: HOME_QUERY,
   });
   let url = `${server}/api/playlist/PLJznl3g92X7P4T3S2lLW8Ws43KfjPCmYs`;
-  // let response = await fetch(url)
-  //   .then((res) => res.json())
-  //   .then((res) => res);
+  let = await fetch(url)
+    .then((res) => res.json())
+    .then((res) => res);
 
   return {
     props: {
-      videos: {},
+      videos: response,
       ...data,
     },
   };
