@@ -1,12 +1,22 @@
-import MainContainer from "@/layouts/container";
-import Hero from "@/components/home/hero";
+import Meta from "@/components/common/meta";
 import Blogs from "@/components/home/blogs";
+import Hero from "@/components/home/hero";
 import Snippets from "@/components/home/snippets";
 import Video from "@/components/home/videos";
-import { gql } from "@apollo/client";
+import MainContainer from "@/layouts/container";
 import client from "@/utils/query/client";
 import server from "@/utils/server";
-import Meta from "@/components/common/meta";
+import { gql } from "@apollo/client";
+import {
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  Text,
+  useDisclosure,
+  useColorModeValue,
+} from "@chakra-ui/react";
+
+import { useEffect } from "react";
 const HOME_QUERY = gql`
   query MyQuery {
     posts(last: 3) {
@@ -28,8 +38,33 @@ const HOME_QUERY = gql`
 `;
 
 export default function Home({ posts, snippets, videos }) {
+  const {
+    isOpen: drawer,
+    onOpen: onDrawerOpen,
+    onClose: onDrawerClose,
+  } = useDisclosure();
+  useEffect(() => {
+    let first = localStorage.getItem("firstVisitCheck");
+    if (!first) {
+      setTimeout(() => {
+        onDrawerOpen();
+      }, 2000);
+      localStorage.setItem("firstVisitCheck", true);
+    }
+  }, []);
+  const shadow = useColorModeValue("sm", "none");
   return (
     <MainContainer>
+      <Drawer placement={"top"} onClose={onDrawerClose} isOpen={drawer}>
+        <DrawerContent shadow={shadow}>
+          <DrawerBody>
+            <Text textAlign={"center"} fontSize="xs">
+              Thank you for visiting.Website is still in beta and some of the
+              pages are still developing.
+            </Text>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
       <Meta />
       <Hero />
       <Blogs posts={posts} />

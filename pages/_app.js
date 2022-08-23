@@ -5,6 +5,7 @@ import { ApolloProvider } from "@apollo/client";
 import theme from "@/utils/theme";
 import useNProgress from "@/utils/nProgress";
 import client from "@/utils/query/client";
+
 function MyApp({ Component, pageProps }) {
   useNProgress();
   return (

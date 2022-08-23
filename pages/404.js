@@ -28,7 +28,7 @@ const NotFound = () => {
           <Text color={"gray.500"}>
             It is possible that the website is in still development.
           </Text>
-          <Button colorScheme="whiteAlpha">Go To Home</Button>
+          {/* <Button colorScheme="whiteAlpha">Go To Home</Button> */}
         </Box>
       </Box>
     </MainContainer>
